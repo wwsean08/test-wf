@@ -2,16 +2,22 @@ on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: ${{ ! startsWith(github.event.head_commit.message, '(HOTFIX)') }}
     steps:
       - uses: actions/checkout@v4
       - name: test
         run: |
-          foo=1
-          echo "foo set"
-          [[ $foo -eq 1 ]] && exit 0
-          echo "exit happened but I still run"
+          echo "ran"
+
+  test2:
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - uses: actions/checkout@v4
+      - run: | 
+          echo "ran"
