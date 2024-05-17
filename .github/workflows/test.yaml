@@ -4,7 +4,10 @@ on:
 jobs:
   build-and-attest:
     runs-on: self-hosted
+    permissions:
+      contents: read
+      attestations: write
     steps:
       - uses: actions/checkout@v4
       - run: |
-          echo "${{ job }}"
+          echo "${{ job.permissions.attestation }}"
