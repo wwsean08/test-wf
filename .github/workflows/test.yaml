@@ -4,9 +4,7 @@ on:
 jobs:
   build-and-attest:
     runs-on: self-hosted
-    env:
-      JSON_DOC: ${{ toJson(job) }}
     steps:
       - uses: actions/checkout@v4
       - run: |
-          echo $JSON_DOC
+          echo "${{ job }}"
